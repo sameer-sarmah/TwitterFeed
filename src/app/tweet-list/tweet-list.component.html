@@ -1,0 +1,58 @@
+<div class="flex-column-container" style="width: 100%;height: 100%; background-color: #a9d4ee;">
+
+  <!-- tweets panel-->
+	<div class="flex-item flex-column-container" style="width: 30%;height: 60%; background-color:white;margin-top: 30px;margin-bottom: 30px;">
+  
+  
+  
+        <!--header--> 
+        <div class="flex-item flex-row-container" style="height: 20%;width: 90% ;background-color:#74c2f2;margin-top: 20px;">
+          <div class="flex-item flex-row-container" style="width: 40%">
+            <img class="flex-item" src="/assets/images/twitter_icon.svg" style="height: 120px;">
+          </div>
+          <div class="flex-item flex-row-container" style="width: 60%">
+            <div class="flex-item flex-row-container text-block">Tweetz Feed</div>
+          </div>
+        </div>
+        <!--header ends here--> 
+
+        <!--tweets container--> 
+        <div class="flex-item flex-column-container"   style="height: 80%;width: 90%">
+          
+          
+                <!--tweet item -->
+                <div class="flex-item flex-row-container tweet-item" *ngFor="let tweetItem of tweetList">
+                      
+                  
+                    <!--profile pic -->
+                    <div class="flex-item flex-row-container" style="width: 40%">
+                      <img class="flex-item" src="{{tweetItem.user.profileImageUrl}}" style="height: 70px;">
+                    </div>
+
+                    <!-- text block i.e user name,tweet,created at-->
+                    <div class="flex-item flex-column-container" style="margin-left: 5px;">
+                      <div class="flex-item flex-column-container-start user-name" style="width: 100%">
+                          {{tweetItem.user.screenName}}
+                        </div>
+                        <div class="flex-item flex-column-container tweet-text">
+                          {{tweetItem.text}}
+                        </div>
+                      <div class="flex-item flex-column-container-start tweet-created" style="width: 100%">
+                          {{tweetItem.createdAt | date:short }} 
+                      </div>
+                    </div>
+                </div>
+            <!--tweet item ends here--> 
+
+                <div class="flex-item flex-row-container tweet-item show-more">
+                    <div class="flex-item flex-row-container " >
+                            <button type="button" (click)="fetchMoreTweets()">Load More</button>
+                    </div>
+              </div>
+        </div>
+        <!--tweets container ends here--> 
+
+  </div>
+   <!-- tweets panel ends here-->
+
+</div>
