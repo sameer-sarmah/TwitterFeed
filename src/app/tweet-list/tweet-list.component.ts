@@ -51,7 +51,7 @@ constructor(private svc:TweetService,private http:HttpService) {
       obs=this.http.getTweetList(this.tweetList.length,this.tweetList.length+this.growingThreshold-1);
       }
       else{
-        obs=this.http.getTweetList(this.tweetList.length,this.tweetCount); 
+        obs=this.http.getTweetList(this.tweetList.length,this.tweetCount-1); 
       }
       obs.subscribe(
       (data) => {
