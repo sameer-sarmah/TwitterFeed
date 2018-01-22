@@ -19,6 +19,7 @@ constructor(private svc:TweetService,private http:HttpService) {
 
   ngOnInit() { 
   this.tweetList=this.svc.getTweetList(this.growingThreshold,this.tweetList.length-1);
+  this.tweetCount=this.svc.getTweetCount();
   // this.getTweetCountHTTP();
   // this.getTweetListHTTP();
   }

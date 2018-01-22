@@ -44,7 +44,7 @@
                 </div>
             <!--tweet item ends here--> 
 
-                <div class="flex-item flex-row-container tweet-item show-more">
+                <div class="flex-item flex-row-container tweet-item show-more" *ngIf="tweetList.length !== tweetCount ">
                     <div class="flex-item flex-row-container " >
                             <button type="button" (click)="fetchMoreTweets()">Load More</button>
                     </div>
