@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TweetService } from '../services/tweet.service';
 import { HttpService } from '../services/http.service';
 import { Observable } from 'rxjs/Observable';
-import { DatePipe } from '@angular/common';
+import { DatePipe,AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-tweet-list',
@@ -10,18 +10,18 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./tweet-list.component.css']
 })
 export class TweetListComponent implements OnInit {
-private tweetList:any[]=[];
-private tweetCount:number=Number.MAX_VALUE;
+public tweetList:any[]=[];
+public tweetCount:number=Number.MAX_VALUE;
 private growingThreshold:number=5;
 constructor(private svc:TweetService,private http:HttpService) { 
 
   }
 
   ngOnInit() { 
-  this.tweetList=this.svc.getTweetList(this.growingThreshold,this.tweetList.length-1);
-  this.tweetCount=this.svc.getTweetCount();
-  // this.getTweetCountHTTP();
-  // this.getTweetListHTTP();
+  //this.tweetList=this.svc.getTweetList(this.growingThreshold,this.tweetList.length-1);
+  //this.tweetCount=this.svc.getTweetCount();
+   this.getTweetCountHTTP();
+   this.getTweetListHTTP();
   }
 
   fetchMoreTweets(){
@@ -48,16 +48,16 @@ constructor(private svc:TweetService,private http:HttpService) {
   getTweetListHTTP(){
      let obs:Observable<any>;
     if((this.tweetList.length+this.growingThreshold)<=this.tweetCount){
-      obs=this.http.getTweetList(this.growingThreshold,this.tweetList.length);
+      obs=this.http.getTweetList(this.tweetList.length,this.tweetList.length+this.growingThreshold-1);
       }
       else{
-        obs=this.http.getTweetList(this.tweetCount-this.tweetList.length,this.tweetList.length); 
+        obs=this.http.getTweetList(this.tweetList.length,this.tweetCount); 
       }
       obs.subscribe(
       (data) => {
-         let products=data.value;
-         console.log(products);
-         this.tweetList=this.tweetList.concat(products);
+         let tweets=data;
+         console.log(tweets);
+         this.tweetList=this.tweetList.concat(tweets);
       },
       (error) => console.log(error)
     );

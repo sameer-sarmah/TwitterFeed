@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class HttpService {
-  private svcURL="https://cors-anywhere.herokuapp.com/services.odata.org/Northwind/Northwind.svc/Products";
+  private svcURL="api/tweets";
   private twitterCount:number;
   constructor(private http: Http) { }
 
@@ -23,15 +23,15 @@ export class HttpService {
     );
   }
 
-  getTweetList(top:number,skip:number):Observable<any>{
-    let paginationQuery="?$top="+top+"&skip="+skip+"&$format=json";
+  getTweetList(from:number,to:number):Observable<any>{
+    let paginationQuery="/sublist?from="+from+"&to="+to+"";
     return this.makeODataCall(this.svcURL+paginationQuery)
 
   }
 
 
   getTweetCount():Observable<any>{
-    return this.makeODataCall(this.svcURL+"/$count");
+    return this.makeODataCall(this.svcURL+"/count");
   }
 
 }
