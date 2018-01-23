@@ -114,6 +114,7 @@ color:#000;
 .tweet-item{
 	margin-top: 10px;
 	min-height: 100px;
+    align-self: start;
 }
 
 .tweets-container{
